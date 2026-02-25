@@ -1,3 +1,32 @@
+# Root ignore for the project
+
+# Node
+node_modules/
+
+# Build outputs
+dist/
+frontend/dist/
+backend/dist/
+
+# Env
+.env
+.env.*
+
+# System
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+
+# Docker
+docker-compose.override.yml
+
+# Uploads
+uploads/
+
+# Logs
+npm-debug.log
 # Nestjs specific
 /dist
 /node_modules
