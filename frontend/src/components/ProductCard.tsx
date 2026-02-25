@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 type Props = {
   title?: string
@@ -21,10 +21,18 @@ export default function ProductCard({ title, description, price, image, loading 
     )
   }
 
+  const [src, setSrc] = useState<string | undefined>(image)
+
   return (
     <article className="bg-white rounded shadow hover:shadow-md overflow-hidden">
       <div className="h-56 bg-gray-100 flex items-center justify-center overflow-hidden">
-        <img src={image} alt={title} className="object-cover h-full w-full transform hover:scale-105 transition-transform duration-200" />
+        <img
+          src={src}
+          alt={title}
+          loading="lazy"
+          onError={() => setSrc('/assets/placeholder.svg')}
+          className="object-cover h-full w-full transform hover:scale-105 transition-transform duration-200"
+        />
       </div>
       <div className="p-4">
         <h3 className="font-medium mb-2">{title}</h3>
