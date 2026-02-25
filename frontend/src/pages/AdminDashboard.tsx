@@ -44,6 +44,10 @@ export default function AdminDashboard() {
       setDescription('')
       setPrice('0.00')
       setFiles([])
+      // show toast then redirect to home to refresh gallery
+      setTimeout(() => {
+        nav('/')
+      }, 800)
     } catch (err: any) {
       setMessage(err?.response?.data?.message || 'Error al subir')
     } finally {
@@ -71,18 +75,18 @@ export default function AdminDashboard() {
 
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow">
           <label className="block mb-2">Título</label>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded mb-4" />
+          <input name="title" value={title} onChange={(e) => setTitle(e.target.value)} className="w-full p-2 border rounded mb-4" />
           <label className="block mb-2">Descripción</label>
-          <textarea value={description} onChange={(e) => setDescription(e.target.value)} className="w-full p-2 border rounded mb-4" />
+          <textarea name="description" value={description} onChange={(e) => setDescription(e.target.value)} className="w-full p-2 border rounded mb-4" />
           <label className="block mb-2">Precio</label>
-          <input value={price} onChange={(e) => setPrice(e.target.value)} className="w-full p-2 border rounded mb-4" />
+          <input name="price" value={price} onChange={(e) => setPrice(e.target.value)} className="w-full p-2 border rounded mb-4" />
 
           <label className="block mb-2">Imágenes (arrastrar o seleccionar múltiples)</label>
           <div
             {...getRootProps()}
             className={`mb-4 p-6 border-2 rounded border-dashed ${isDragActive ? 'border-black bg-white' : 'border-gray-300 bg-gray-50'} text-center cursor-pointer`}
           >
-            <input {...getInputProps()} />
+            <input name="files" {...getInputProps()} />
             {isDragActive ? (
               <p>Suelta las imágenes aquí...</p>
             ) : (
@@ -103,6 +107,7 @@ export default function AdminDashboard() {
           </div>
           {message && <div className="mt-4 text-sm">{message}</div>}
         </form>
+        {message && <div className="fixed bottom-6 right-6 bg-black text-white px-4 py-2 rounded shadow">{message}</div>}
       </div>
     </div>
   )

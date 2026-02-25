@@ -1,0 +1,17 @@
+{
+  "name": "revestidas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "compose:up": "docker compose up -d",
+    "compose:down": "docker compose down",
+    "compose:logs": "docker compose logs -f",
+    "install:all": "npm install && (cd frontend && npm install) && (cd backend && npm install)",
+    "frontend": "cd frontend && npm run dev",
+    "backend:dev": "cd backend && npm run start:dev",
+    "dev": "npm run compose:up && npm run frontend"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

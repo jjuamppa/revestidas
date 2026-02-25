@@ -27,6 +27,7 @@ export default function ProductCard({ title, description, price, image, loading 
         <img src={image} alt={title} className="object-cover h-full w-full transform hover:scale-105 transition-transform duration-200" />
       </div>
       <div className="p-4">
+        <h3 className="font-medium mb-2">{title}</h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{description}</p>
         <div className="text-lg font-semibold">${price}</div>
       </div>

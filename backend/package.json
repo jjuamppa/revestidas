@@ -5,9 +5,13 @@
   "scripts": {
     "start": "node dist/main.js",
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-    "build": "tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "lint": "eslint '{src,test}/**/*.ts' --fix",
-    "seed:admin": "ts-node ./scripts/seed-admin.ts"
+    "seed:admin": "ts-node ./scripts/seed-admin.ts",
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js migration:generate -d src/data-source.ts",
+    "migration:create": "ts-node ./node_modules/typeorm/cli.js migration:create -d src/data-source.ts",
+    "migration:run": "ts-node ./node_modules/typeorm/cli.js migration:run -d src/data-source.ts",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert -d src/data-source.ts"
   },
   "dependencies": {
     "@nestjs/common": "^9.0.0",
@@ -32,6 +36,8 @@
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.0.0"
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.0",
+    "@types/multer": "^1.4.7"
   }
 }

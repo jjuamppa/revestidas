@@ -6,6 +6,15 @@ html, body, #root {
   height: 100%;
 }
 
+/* Global background and base font */
+body {
+  background-color: #FAFAFA;
+  color: #111827;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* Small helpers */
 .container {
   max-width: 1200px;
