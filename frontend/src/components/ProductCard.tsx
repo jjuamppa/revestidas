@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 type Props = {
   title?: string
@@ -22,6 +22,15 @@ export default function ProductCard({ title, description, price, image, loading 
   }
 
   const [src, setSrc] = useState<string | undefined>(image)
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'Escape') setIsOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
 
   return (
     <article className="bg-white rounded shadow hover:shadow-md overflow-hidden">
@@ -31,9 +40,35 @@ export default function ProductCard({ title, description, price, image, loading 
           alt={title}
           loading="lazy"
           onError={() => setSrc('/assets/placeholder.svg')}
-          className="object-cover h-full w-full transform hover:scale-105 transition-transform duration-200"
+          onClick={() => setIsOpen(true)}
+          className="object-cover h-full w-full transform hover:scale-105 transition-transform duration-200 cursor-pointer"
         />
       </div>
+
+      {isOpen && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          className="fixed inset-0 z-50 bg-black bg-opacity-60 flex items-center justify-center p-4"
+          onClick={() => setIsOpen(false)}
+        >
+          <div className="relative max-w-full max-h-full" onClick={(e) => e.stopPropagation()}>
+            <button
+              onClick={() => setIsOpen(false)}
+              aria-label="Cerrar imagen"
+              className="absolute -top-3 -right-3 bg-white rounded-full p-1 shadow-lg"
+            >
+              ✕
+            </button>
+            <img
+              src={src}
+              alt={title}
+              onError={() => setSrc('/assets/placeholder.svg')}
+              className="max-w-[90vw] max-h-[90vh] object-contain rounded bg-white"
+            />
+          </div>
+        </div>
+      )}
       <div className="p-4">
         <h3 className="font-medium mb-2">{title}</h3>
         <p className="text-sm text-gray-600 mb-3 line-clamp-2">{description}</p>

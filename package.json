@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "compose:up": "docker compose up -d",
-    "compose:down": "docker compose down",
-    "compose:logs": "docker compose logs -f",
+    "compose:up": "docker compose -f docker-compose.dev.yml up -d",
+    "compose:down": "docker compose -f docker-compose.dev.yml down",
+    "compose:logs": "docker compose -f docker-compose.dev.yml logs -f",
+    "compose:restart": "docker compose -f docker-compose.dev.yml up -d --build",
     "install:all": "npm install && (cd frontend && npm install) && (cd backend && npm install)",
     "frontend": "cd frontend && npm run dev",
     "backend:dev": "cd backend && npm run start:dev",
-    "dev": "npm run compose:up && npm run frontend"
+    "dev": "npx concurrently -k -n frontend,backend -c green,blue \"cd frontend && npm run dev\" \"cd backend && PORT=4002 npm run start:dev\""
   },
   "engines": {
     "node": ">=18"
