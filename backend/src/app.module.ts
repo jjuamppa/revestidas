@@ -10,13 +10,13 @@ import { User } from './entities/user.entity';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DATABASE_HOST || 'localhost',
-      port: parseInt(process.env.DATABASE_PORT || '5432', 10),
-      username: process.env.DATABASE_USER || 'postgres',
-      password: process.env.DATABASE_PASSWORD || 'postgres',
-      database: process.env.DATABASE_NAME || 'revestidas',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USER || 'postgres',
+      password: process.env.DB_PASS || 'postgres',
+      database: process.env.DB_NAME || 'revestidas',
       entities: [Product, Image, User],
-      synchronize: true
+      synchronize: true,
     }),
     ProductsModule,
     AuthModule

@@ -1,16 +1,19 @@
+import { config } from 'dotenv';
+import { resolve, join } from 'path';
+config({ path: resolve(__dirname, '../../.env') });
+
 import { DataSource } from 'typeorm';
 import { User } from '../src/entities/user.entity';
 import * as bcrypt from 'bcryptjs';
-import { join } from 'path';
 
 async function run() {
   const dataSource = new DataSource({
     type: 'postgres',
-    host: process.env.DATABASE_HOST || 'localhost',
-    port: parseInt(process.env.DATABASE_PORT || '5432', 10),
-    username: process.env.DATABASE_USER || 'postgres',
-    password: process.env.DATABASE_PASSWORD || 'postgres',
-    database: process.env.DATABASE_NAME || 'revestidas',
+    host: process.env.DB_HOST || 'localhost',
+    port: parseInt(process.env.DB_PORT || '5432', 10),
+    username: process.env.DB_USER || 'postgres',
+    password: process.env.DB_PASS || 'postgres',
+    database: process.env.DB_NAME || 'revestidas',
     entities: [join(__dirname, '..', 'src', 'entities', '*.ts')],
     synchronize: true,
   });

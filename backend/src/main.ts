@@ -1,4 +1,7 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
+import { resolve } from 'path';
+config({ path: resolve(__dirname, '../../.env') });
+
 import { NestFactory } from '@nestjs/core';
 import { json } from 'body-parser';
 import { AppModule } from './app.module';
